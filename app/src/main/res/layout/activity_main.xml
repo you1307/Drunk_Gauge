@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_3"
+    tools:context=".MainActivity">
+
+    <ImageButton
+        android:id="@+id/ComprehensionBTN"
+        android:layout_width="158dp"
+        android:layout_height="163dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/comprention_btn_press_selector"
+        android:contentDescription="Comprehension test button"
+        app:layout_constraintBottom_toBottomOf="@+id/ReactionTestBTN"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ReactionTestBTN"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/ReactionTestBTN"
+        android:layout_width="165dp"
+        android:layout_height="162dp"
+        android:layout_marginTop="285dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="284dp"
+        android:background="@drawable/reaction_test_selctor_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.767"
+        app:layout_constraintStart_toEndOf="@+id/ComprehensionBTN"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/GoToScoreBoardBTN"
+        android:layout_width="115dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/trophy_pused_selctor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.199"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/SettingsBTN"
+        android:layout_width="107dp"
+        android:layout_height="105dp"
+        android:layout_marginStart="60dp"
+        android:background="@drawable/settings_btn_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/GoToScoreBoardBTN"
+        app:layout_constraintStart_toEndOf="@+id/GoToScoreBoardBTN"
+        app:layout_constraintTop_toTopOf="@+id/GoToScoreBoardBTN"
+        app:layout_constraintVertical_bias="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

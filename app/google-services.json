@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "437399853280",
+    "firebase_url": "https://reaction-test-adc37.firebaseio.com",
+    "project_id": "reaction-test-adc37",
+    "storage_bucket": "reaction-test-adc37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437399853280:android:8f345fa3f799b53e101885",
+        "android_client_info": {
+          "package_name": "com.thetechnoobs.reactiontest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437399853280-fovo5gall04sk1i7t9n0g7acklgud4ku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgJGXt3adpVB8RYwFHdqOU68gTHQb1zbI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437399853280-fovo5gall04sk1i7t9n0g7acklgud4ku.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
