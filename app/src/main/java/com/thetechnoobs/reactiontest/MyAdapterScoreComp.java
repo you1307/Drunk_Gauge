@@ -68,12 +68,15 @@ public class MyAdapterScoreComp extends RecyclerView.Adapter<MyAdapterScoreComp.
 
         switch (position) {
             case 0:
+                holder.TrophyImg.setVisibility(View.VISIBLE);
                 holder.TrophyImg.setImageResource(R.drawable.first_trophy);
                 break;
             case 1:
+                holder.TrophyImg.setVisibility(View.VISIBLE);
                 holder.TrophyImg.setImageResource(R.drawable.second_trophy);
                 break;
             case 2:
+                holder.TrophyImg.setVisibility(View.VISIBLE);
                 holder.TrophyImg.setImageResource(R.drawable.third_trophy);
                 break;
         }
