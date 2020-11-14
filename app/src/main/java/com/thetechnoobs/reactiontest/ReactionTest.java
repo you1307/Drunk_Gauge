@@ -1,37 +1,26 @@
 package com.thetechnoobs.reactiontest;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.WindowDecorActionBar;
 import androidx.core.content.ContextCompat;
 
-import android.annotation.SuppressLint;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.text.format.Time;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.thetechnoobs.reactiontest.MainActivity;
-import com.thetechnoobs.reactiontest.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
 
 public class ReactionTest extends AppCompatActivity {
 
-    ImageButton MainBTN;
+    ReactionTestCustomViewBtn MainBTN;
     TextView LastTimeTXT, SetPosTXT;
     List<String> Times = new ArrayList<>();
     int RoundCount = 0;
@@ -111,22 +100,30 @@ public class ReactionTest extends AppCompatActivity {
     }
 
     private void SettupOnClicks() {
-        MainBTN.setOnClickListener(new View.OnClickListener() {
+        MainBTN.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if(AllowTap){
-                    StopTimerGetTime();
-                    MainBTN.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.stop_sign));
-                    AllowTap = false;
-                }else {
-                    countDownTimer.cancel();
-                    killTimer = true;
-                    TapedEarly();
-                    Toast.makeText(getApplicationContext(), "TO EARLY", Toast.LENGTH_SHORT).show();
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    MainBTNClicked();
+                    return true;
                 }
 
+                return false;
             }
         });
+    }
+
+    private void MainBTNClicked() {
+        if(AllowTap){
+            StopTimerGetTime();
+            MainBTN.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.stop_sign));
+            AllowTap = false;
+        }else {
+            countDownTimer.cancel();
+            killTimer = true;
+            TapedEarly();
+            Toast.makeText(getApplicationContext(), "TO EARLY", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void TapedEarly() {
@@ -171,7 +168,7 @@ public class ReactionTest extends AppCompatActivity {
 
 
     private void settup() {
-        MainBTN = findViewById(R.id.MainReactionBTN);
+        MainBTN = findViewById(R.id.MainBTN);
         LastTimeTXT = findViewById(R.id.CurTimeTXT);
         SetPosTXT = findViewById(R.id.SetPosTXT);
     }
