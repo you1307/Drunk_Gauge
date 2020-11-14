@@ -3,6 +3,7 @@ package com.thetechnoobs.reactiontest;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -88,7 +89,7 @@ public class ReactionTest extends AppCompatActivity {
                     Rfound = true;
                     onFinish();
                 }
-                Log.v("test", "" + r);
+                Log.v("testing", "" + r);
             }
 
             public void onFinish() {
@@ -101,13 +102,13 @@ public class ReactionTest extends AppCompatActivity {
 
     private void SettupOnClicks() {
         MainBTN.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     MainBTNClicked();
                     return true;
                 }
-
                 return false;
             }
         });
@@ -148,6 +149,7 @@ public class ReactionTest extends AppCompatActivity {
         StartInitialDelayTimeDelay();
     }
 
+    @SuppressLint("SetTextI18n")
     private void RoundCheck() {
         if(RoundCount == 5){
             SaveAverageReactionTimeToFireBase();

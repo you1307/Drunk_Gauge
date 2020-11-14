@@ -1,5 +1,6 @@
 package com.thetechnoobs.reactiontest.astroidGame;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@SuppressWarnings("ALL")
+@SuppressLint("ViewConstructor")
 public class GameView extends SurfaceView implements Runnable {
     private final Paint paint, BackgroundRectPaint, scoreTextPaint;
     UserCharecter userCharecter;
@@ -22,6 +25,8 @@ public class GameView extends SurfaceView implements Runnable {
     ArrayList<Astriod> astriods = new ArrayList<>();
     ArrayList<RegularBullet> bullets = new ArrayList<>();
     int[] screenSize = {0, 0};
+    int maxAstroidSpawn = 6;
+    int astroidMaxSpeed = AstroidConstants.INITIAL_ASTEROID_MAX_SPEED;
     Canvas canvas;
     private Thread thread;
     private boolean isPlaying = false;
@@ -61,7 +66,8 @@ public class GameView extends SurfaceView implements Runnable {
     public void run() {
         while (isPlaying) {
             draw();
-            sleep(10);
+            scaleDifficulty();
+            //sleep(10);
         }
     }
 
@@ -75,7 +81,6 @@ public class GameView extends SurfaceView implements Runnable {
             canvas.drawRect(backgroundRect, BackgroundRectPaint);//needed inorder to stop graphics from duplicating
             canvas.drawBitmap(userCharecter.bitmap, userCharecter.getCurX(), userCharecter.getCurY(), null);
             canvas.drawBitmap(shootRegularButtonUI.bitmap, shootRegularButtonUI.getX(), shootRegularButtonUI.getY(), null);
-
 
             drawUserHealth();
             drawUserScore();
@@ -105,6 +110,7 @@ public class GameView extends SurfaceView implements Runnable {
         SpawnAndDeleteBackgroundStars();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
@@ -172,6 +178,34 @@ public class GameView extends SurfaceView implements Runnable {
         }
     }
 
+    private void scaleDifficulty() {
+        if (userCharecter.getUserScore() > 50) {
+            maxAstroidSpawn = 8;
+            astroidMaxSpeed = 10;
+        } else if (userCharecter.getUserScore() > 200) {
+            maxAstroidSpawn = 11;
+            astroidMaxSpeed = 15;
+        } else if (userCharecter.getUserScore() > 400) {
+            maxAstroidSpawn = 15;
+            astroidMaxSpeed = 20;
+        } else if (userCharecter.getUserScore() > 650) {
+            maxAstroidSpawn = 17;
+            astroidMaxSpeed = 23;
+        } else if (userCharecter.getUserScore() > 750) {
+            maxAstroidSpawn = 20;
+            astroidMaxSpeed = 30;
+        } else if (userCharecter.getUserScore() > 950) {
+            maxAstroidSpawn = 24;
+            astroidMaxSpeed = 35;
+        } else if (userCharecter.getUserScore() > 1050) {
+            maxAstroidSpawn = 28;
+            astroidMaxSpeed = 40;
+        } else if (userCharecter.getUserScore() > 1200) {
+            maxAstroidSpawn = 30;
+            astroidMaxSpeed = 50;
+        }
+    }
+
     private void drawUserScore() {
         canvas.drawText(String.valueOf(userCharecter.getUserScore()), (float) screenx / 2, (float) screeny / 20, scoreTextPaint);
     }
@@ -233,10 +267,8 @@ public class GameView extends SurfaceView implements Runnable {
     }
 
     private void SpawnAndDeleteAstroids() {
-        int maxAstroidSpawn = 6;
-
         if (astriods.size() < maxAstroidSpawn) {
-            Astriod astriod = new Astriod(randomNum(screenx - (screenx / AstroidConstants.SCALE_RATIO_NUM_X_FOREGROUND), 0), 0, randomNum(AstroidConstants.ASTROID_MAX_SPEED, 5), screenSize, getResources());
+            Astriod astriod = new Astriod(randomNum(screenx - (screenx / AstroidConstants.SCALE_RATIO_NUM_X_FOREGROUND), 0), 0, randomNum(astroidMaxSpeed, 5), screenSize, getResources());
             astriods.add(astriod);
         }
 

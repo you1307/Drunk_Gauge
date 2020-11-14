@@ -7,18 +7,9 @@ public class User {
     private String AverageTime = "40.888";
     private String FastestReactionTime = "40.888";
     private String FastestAvgReactionTime = "40.888";
+    private String AsteroidHighScore = "2";
 
     public User(){
-    }
-
-
-    public User(String name, String userID, String time, String fastestReactionTime, String fastestAvgReactionTime) {
-        Name = name;
-        Time = time;
-        UserID = userID;
-        FastestReactionTime = fastestReactionTime;
-        FastestAvgReactionTime = fastestAvgReactionTime;
-
     }
 
     public String getFastestAvgReactionTime() {
@@ -27,6 +18,14 @@ public class User {
 
     public void setFastestAvgReactionTime(String fastestAvgReactionTime) {
         FastestAvgReactionTime = fastestAvgReactionTime;
+    }
+
+    public String getAsteroidHighScore() {
+        return AsteroidHighScore;
+    }
+
+    public void setAsteroidHighScore(String asteroidHighScore) {
+        AsteroidHighScore = asteroidHighScore;
     }
 
     public String getFastestReactionTime() {

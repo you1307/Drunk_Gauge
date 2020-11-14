@@ -3,7 +3,7 @@ package com.thetechnoobs.reactiontest.astroidGame;
 public class AstroidConstants {
     final static int BACKGROUND_STAR_MAX_SPEED = 30;
 
-    final static int ASTROID_MAX_SPEED = 3;
+    final static int INITIAL_ASTEROID_MAX_SPEED = 5;
 
     final static int USER_MAX_HEATH = 5;
 

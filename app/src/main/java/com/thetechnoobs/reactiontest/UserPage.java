@@ -21,12 +21,13 @@ import java.util.regex.Pattern;
 
 public class UserPage extends AppCompatActivity {
     String TargetUserID;
-    TextView UserNameTXT, UserIDTXT, imgRecontitionAvgTXT, imgFastestTimeTXT, ReactionTimeFastestTXT, ReactionTestAvgTimesTXT;
+    TextView UserNameTXT, UserIDTXT, imgRecontitionAvgTXT, imgFastestTimeTXT, ReactionTimeFastestTXT, ReactionTestAvgTimesTXT, AsteroidHighScoreTXT;
     List<String> names = new ArrayList<>();
     List<String> times = new ArrayList<>();
     List<String> avgTimes = new ArrayList<>();
     List<String> ReactionTestAverageTimes = new ArrayList<>();
     List<String> ReactionTestFastestTimes = new ArrayList<>();
+    List<String> AsteroidHighScores = new ArrayList<>();
     List<User> PeopleData = new ArrayList<>();
     List<String> UserIds = new ArrayList<>();
 
@@ -48,6 +49,7 @@ public class UserPage extends AppCompatActivity {
         imgFastestTimeTXT = findViewById(R.id.UP_ImgFastestTimeTXT);
         ReactionTimeFastestTXT = findViewById(R.id.ReactionTimeFastestTXT);
         ReactionTestAvgTimesTXT = findViewById(R.id.AvgReactionTestTXT);
+        AsteroidHighScoreTXT = findViewById(R.id.AsteroidHighScoreTXT);
     }
 
     private void GetUserInfo() {
@@ -66,6 +68,7 @@ public class UserPage extends AppCompatActivity {
         imgFastestTimeTXT.setText(PeopleData.get(pos).getImgFastestTime());
         ReactionTimeFastestTXT.setText(PeopleData.get(pos).getFastestReactionTime());
         ReactionTestAvgTimesTXT.setText(PeopleData.get(pos).getFastestAvgReactionTime());
+        AsteroidHighScoreTXT.setText(PeopleData.get(pos).getAsteroidHighScore());
     }
 
 
@@ -100,6 +103,10 @@ public class UserPage extends AppCompatActivity {
                 for(int i = 0; i < UserIds.size(); i++){
                     ReactionTestAverageTimes.add(String.valueOf(snapshot.child("Users").child(UserIds.get(i)).child("AverageReactionTime").getValue()));
                 }
+
+                for(int i = 0; i < UserIds.size(); i++){
+                    AsteroidHighScores.add(String.valueOf(snapshot.child("Users").child(UserIds.get(i)).child("AsteroidScore").getValue()));
+                }
                 BuildUser();
             }
             @Override
@@ -121,6 +128,7 @@ public class UserPage extends AppCompatActivity {
                 user.setImgRecAverageTime(avgTimes.get(i));
                 user.setFastestReactionTime(ReactionTestFastestTimes.get(i));
                 user.setFastestAvgReactionTime(ReactionTestAverageTimes.get(i));
+                user.setAsteroidHighScore(AsteroidHighScores.get(i));
                 PeopleData.add(user);//userdata saved as a userObject in array
             }else{
                 Log.v("INFO", "Ignored: "+UserIds.get(i));

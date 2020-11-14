@@ -13,10 +13,14 @@ import androidx.annotation.Nullable;
 
 import com.thetechnoobs.reactiontest.MainActivity;
 import com.thetechnoobs.reactiontest.R;
+import com.thetechnoobs.reactiontest.SaveData;
+
+import java.util.Objects;
 
 public class EndGameScreen extends Activity {
     TextView ScoreTXT;
     Button RestartBtn, EndGameBtn;
+    int userScore;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,13 +31,20 @@ public class EndGameScreen extends Activity {
 
         Settup();
         LoadScore();
+        AutoSaveNewScore();
+    }
+
+    private void AutoSaveNewScore() {
+        SaveData saveData = new SaveData();
+        saveData.SaveAsteroidGameHighScore(this, saveData.getUserID(this), userScore);
     }
 
     private void LoadScore() {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
-            String userScore = bundle.get("score").toString();
-            ScoreTXT.setText(userScore);
+            String scoreTemp = Objects.requireNonNull(bundle.get("score")).toString();
+            userScore = Integer.parseInt(scoreTemp);
+            ScoreTXT.setText(scoreTemp);
         }else{
             Log.v("testing", "Error Loading Score");
         }
@@ -63,6 +74,8 @@ public class EndGameScreen extends Activity {
                 EndGame();
             }
         });
+
+
     }
 
     private void EndGame() {

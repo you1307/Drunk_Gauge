@@ -2,9 +2,7 @@ package com.thetechnoobs.reactiontest;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,45 +10,44 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class MyAdapterScoreComp extends RecyclerView.Adapter<MyAdapterScoreComp.MyViewHolder>{
+public class MyAdapterScoreComp extends RecyclerView.Adapter<MyAdapterScoreComp.MyViewHolder> {
     Context context;
     int OrgWith;
     List<User> PeopleDataOrganized;
 
-    public MyAdapterScoreComp(Context ct, List<User> people, int orgWith){
+    public MyAdapterScoreComp(Context ct, List<User> people, int orgWith) {
         context = ct;
         OrgWith = orgWith;
         OrganizeUsers(people);//organize data
         PeopleDataOrganized = people;
     }
 
-    public void  OrganizeUsers(List<User> peopleData){
+    public void OrganizeUsers(final List<User> peopleData) {
         Collections.sort(peopleData, new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
 
-                switch (OrgWith){
+                switch (OrgWith) {
+                    case 2:
+                        return Integer.compare(Integer.parseInt(o2.getAsteroidHighScore()), Integer.parseInt(o1.getAsteroidHighScore()));//sort from greatest to least
                     case 1:
-                        return Integer.compare(Integer.parseInt(o1.getFastestReactionTime().replace(".", "")), Integer.parseInt(o2.getFastestReactionTime().replace(".", "")));//get time, remove non ints, then compare
+                        return Integer.compare(Integer.parseInt(o1.getFastestReactionTime().replace(".", "")), Integer.parseInt(o2.getFastestReactionTime().replace(".", "")));//get time, remove non ints, then compare least to greatest
                     case 0:
                     default:
-                        return Integer.compare(Integer.parseInt(o1.getImgFastestTime().replace(".", "")), Integer.parseInt(o2.getImgFastestTime().replace(".", "")));//get time, remove non ints, then compare
+                        return Integer.compare(Integer.parseInt(o1.getImgFastestTime().replace(".", "")), Integer.parseInt(o2.getImgFastestTime().replace(".", "")));//get time, remove non ints, then compare least to greatest
                 }
             }
         });
     }
 
-    public void ReOrganizeData(int orgWith){
+    public void ReOrganizeData(int orgWith) {
         OrgWith = orgWith;
         OrganizeUsers(PeopleDataOrganized);
     }
@@ -88,12 +85,20 @@ public class MyAdapterScoreComp extends RecyclerView.Adapter<MyAdapterScoreComp.
 
         if (person.getUserID().equals(new SaveData().getUserID(context))) {
             holder.CardLayout.setBackgroundResource(R.drawable.leaderboared_curuser);
+        }else{
+            holder.CardLayout.setBackgroundResource(R.drawable.green_blue_gradeient);
         }
 
         holder.UserIDTXT.setText(person.getUserID());
         holder.NameTXT.setText(person.getName());
 
-        switch (OrgWith){
+        switch (OrgWith) {
+            case 2:
+                holder.AvgTimeTXT.setVisibility(View.GONE);
+                holder.RightTextID.setVisibility(View.GONE);
+                holder.TimeTXT.setText(String.valueOf(person.getAsteroidHighScore()));
+                holder.LeftTextID.setText("High Score");
+                return;
             case 1:
                 holder.TimeTXT.setText(person.getFastestReactionTime());
                 holder.AvgTimeTXT.setText(person.getFastestAvgReactionTime());
@@ -113,10 +118,11 @@ public class MyAdapterScoreComp extends RecyclerView.Adapter<MyAdapterScoreComp.
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView UserIDTXT, NameTXT, TimeTXT, AvgTimeTXT;
+        TextView LeftTextID, RightTextID;//needed to modify the title texts
         ImageView TrophyImg;
         RelativeLayout CardLayout;
 
-        public MyViewHolder(@NonNull View itemView){
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
@@ -126,6 +132,8 @@ public class MyAdapterScoreComp extends RecyclerView.Adapter<MyAdapterScoreComp.
             UserIDTXT = itemView.findViewById(R.id.IDTXT);
             NameTXT = itemView.findViewById(R.id.NameTXT);
             TimeTXT = itemView.findViewById(R.id.TimeTXT);
+            LeftTextID = itemView.findViewById(R.id.LeftTitleTXT);
+            RightTextID = itemView.findViewById(R.id.RightTitleTXT);
         }
 
         @Override

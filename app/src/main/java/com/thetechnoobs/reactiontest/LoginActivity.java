@@ -16,6 +16,7 @@ public class LoginActivity extends AppCompatActivity {
 
     String UserName, UserID;
     String DefaultTime = "59.999";
+    int DefaultAsteroidScore = 2;
     List<String> DefaultAvgTimes = new ArrayList<>();
     EditText UserNameEdit;
     Button DoneBTN;
@@ -61,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         saveData.SaveAverageFastestTime(DefaultAvgTimes, UserID, getApplicationContext());//save a default avg time so its not null
         saveData.SaveFastestReactionTime(DefaultTime, UserID, getApplicationContext());//save a default reaction time so its not null
         saveData.SaveAverageFastestReactionTime(DefaultAvgTimes, UserID, getApplicationContext());//save a default avg time so its not null
+        saveData.SaveAsteroidGameHighScore(this, UserID, DefaultAsteroidScore);//save a default value for asteroid game so its not null
     }
 
     public void GotoMainPage(){

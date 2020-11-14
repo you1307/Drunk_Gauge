@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
@@ -30,17 +29,18 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
                 android:padding="8dp"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                app:srcCompat="@drawable/ic_launcher_background"
+                android:contentDescription="trophy image for placement"/>
 
             <TextView
                 android:id="@+id/TimeTXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/textView2"
-                android:layout_alignEnd="@+id/textView2"
+                android:layout_alignTop="@+id/LeftTitleTXT"
+                android:layout_alignEnd="@+id/LeftTitleTXT"
                 android:layout_marginTop="19dp"
                 android:layout_marginEnd="19dp"
-                android:text="TextView"
+                android:text="@string/text"
                 android:textAlignment="center" />
 
             <TextView
@@ -50,7 +50,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/NameTXT"
                 android:layout_marginTop="0dp"
-                android:text="TextView"
+                android:text="@string/text"
                 android:textAlignment="center" />
 
             <TextView
@@ -58,41 +58,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textAllCaps="true"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="@font/drawing_font"
                 android:layout_marginTop="0dp"
-                android:text="TextView"
+                android:text="@string/text"
                 android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/AverageTimeTXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/AvgTimeDisTXT"
-                android:layout_alignEnd="@+id/AvgTimeDisTXT"
+                android:layout_alignTop="@+id/RightTitleTXT"
+                android:layout_alignEnd="@+id/RightTitleTXT"
                 android:layout_marginTop="19dp"
                 android:layout_marginEnd="19dp"
-                android:text="TextView"
+                android:text="@string/text"
                 android:textAlignment="center" />
 
             <TextView
-                android:id="@+id/AvgTimeDisTXT"
+                android:id="@+id/RightTitleTXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/textView2"
+                android:layout_alignTop="@+id/LeftTitleTXT"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="38dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="40dp"
                 android:layout_toEndOf="@+id/IDTXT"
                 android:fontFamily="@font/raleway_bolditalic"
-                android:text="Average Time"
+                android:text="@string/average_time"
                 android:textAlignment="center" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/LeftTitleTXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
@@ -100,7 +100,7 @@
                 android:layout_marginBottom="40dp"
                 android:layout_toStartOf="@+id/IDTXT"
                 android:fontFamily="@font/raleway_bolditalic"
-                android:text="Fastest Time"
+                android:text="@string/fastest_time"
                 android:textAlignment="center" />
 
         </RelativeLayout>

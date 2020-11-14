@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/sort_btn_backgrond"
             android:padding="10dp"
-            android:text="Sort by Comprehension time"
+            android:text="Comprehension time"
             android:textSize="10dp" />
 
         <Button
@@ -30,8 +30,17 @@
             android:layout_height="wrap_content"
             android:background="@drawable/sort_btn_backgrond"
             android:padding="10dp"
-            android:text="Sort by Reaction time"
-            android:textSize="10dp" />
+            android:text="Reaction time"
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/AsteroidBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@drawable/sort_btn_backgrond"
+            android:text="Asteroid score"
+            android:textSize="10sp" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

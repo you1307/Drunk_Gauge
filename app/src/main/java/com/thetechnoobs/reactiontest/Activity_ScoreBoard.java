@@ -6,12 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ShareActionProvider;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,9 +31,10 @@ public class Activity_ScoreBoard extends AppCompatActivity {
     List<String> ReactionTimes = new ArrayList<>();
     List<User> PeopleData = new ArrayList<>();
     List<String> UserIds = new ArrayList<>();
+    List<String> AsteroidsScores = new ArrayList<>();
     MyAdapterScoreComp myAdapterScoreComp;
     String OrgUsersWith = Constants.REAC_IDENT;
-    Button SortByCompTimeBTN, SortByReacTimeBTN;
+    Button SortByCompTimeBTN, SortByReacTimeBTN, SortByAsteroidScoreBTN;
     int FilterBTNVal = 0;
 
 
@@ -56,6 +55,7 @@ public class Activity_ScoreBoard extends AppCompatActivity {
         ReactionTimes.clear();
         UserIds.clear();
         PeopleData.clear();
+        AsteroidsScores.clear();
 
         recyclerView.removeAllViews();
         myAdapterScoreComp.ReOrganizeData(FilterBTNVal);
@@ -72,21 +72,29 @@ public class Activity_ScoreBoard extends AppCompatActivity {
     public void settup(){
         SortByCompTimeBTN = findViewById(R.id.CompSortBTN);
         SortByReacTimeBTN = findViewById(R.id.ReacSortBTN);
+        SortByAsteroidScoreBTN = findViewById(R.id.AsteroidBTN);
         recyclerView = findViewById(R.id.recyclerView);
         SettupFilterButtons();
         SettupOnClick();
     }
 
     private void SettupFilterButtons() {
-        FilterBTNVal = new SaveData().getFilterButtonInt(getApplicationContext());//0 is filtering by comprehension---1 is filter by reaction
+        FilterBTNVal = new SaveData().getFilterButtonInt(getApplicationContext());//0 is filtering by comprehension---1 is filter by reaction----2 filter by asteroid high score
         switch (FilterBTNVal){
             case 0:
                 SortByReacTimeBTN.setBackgroundResource(R.drawable.sort_btn_backgrond);
                 SortByCompTimeBTN.setBackgroundResource(R.drawable.filter_btn_active_background);
+                SortByAsteroidScoreBTN.setBackgroundResource(R.drawable.sort_btn_backgrond);
                 break;
             case 1:
                 SortByCompTimeBTN.setBackgroundResource(R.drawable.sort_btn_backgrond);
+                SortByAsteroidScoreBTN.setBackgroundResource(R.drawable.sort_btn_backgrond);
                 SortByReacTimeBTN.setBackgroundResource(R.drawable.filter_btn_active_background);
+                break;
+            case 2:
+                SortByCompTimeBTN.setBackgroundResource(R.drawable.sort_btn_backgrond);
+                SortByReacTimeBTN.setBackgroundResource(R.drawable.sort_btn_backgrond);
+                SortByAsteroidScoreBTN.setBackgroundResource(R.drawable.filter_btn_active_background);
                 break;
         }
     }
@@ -108,6 +116,16 @@ public class Activity_ScoreBoard extends AppCompatActivity {
                 OrgUsersWith = Constants.REAC_IDENT;
                 ReloadData();
                 SaveNewSortSelection(1);
+                SettupFilterButtons();
+            }
+        });
+
+        SortByAsteroidScoreBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OrgUsersWith = Constants.ASTEROID_IDENT;
+                ReloadData();
+                SaveNewSortSelection(2);
                 SettupFilterButtons();
             }
         });
@@ -149,6 +167,10 @@ public class Activity_ScoreBoard extends AppCompatActivity {
                 for(int i = 0; i < UserIds.size(); i++){
                     avgReactionTimes.add(String.valueOf(snapshot.child("Users").child(UserIds.get(i)).child("AverageReactionTime").getValue()));
                 }
+
+                for(int i = 0; i < UserIds.size(); i++){
+                    AsteroidsScores.add(String.valueOf(snapshot.child("Users").child(UserIds.get(i)).child("AsteroidScore").getValue()));
+                }
                 BuildUser();
             }
 
@@ -170,6 +192,7 @@ public class Activity_ScoreBoard extends AppCompatActivity {
                 user.setImgRecAverageTime(avgTimes.get(i));
                 user.setFastestReactionTime(ReactionTimes.get(i));
                 user.setFastestAvgReactionTime(avgReactionTimes.get(i));
+                user.setAsteroidHighScore(AsteroidsScores.get(i));
                 PeopleData.add(user);//userdata saved as a userObject in array
             } else {
                 Log.v("INFO", "Ignored: " + UserIds.get(i));
