@@ -8,8 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.thetechnoobs.reactiontest.astroidGame.GameActivity;
+
 public class MainActivity extends AppCompatActivity {
     ImageButton ComprehentionBTN, ReactionBTN, ScoreBoardBTN, SettingsBTN;
+    Button AstroidShooterBTN;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -58,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        AstroidShooterBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent GoToAstroidGame = new Intent(getApplicationContext(), GameActivity.class);
+                startActivity(GoToAstroidGame);
+                finish();
+            }
+        });
 
     }
 
@@ -78,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         ComprehentionBTN = findViewById(R.id.ComprehensionBTN);
         ReactionBTN = findViewById(R.id.ReactionTestBTN);
         ScoreBoardBTN = findViewById(R.id.GoToScoreBoardBTN);
+        AstroidShooterBTN = findViewById(R.id.AstroidShooterBTN);
     }
 
     @Override

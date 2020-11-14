@@ -17,6 +17,8 @@
         <activity android:name=".Activity_ScoreBoard" />
         <activity android:name=".Settings" />
         <activity android:name=".LoginActivity" />
+        <activity android:name=".astroidGame.EndGameScreen"/>
+        <activity android:name=".astroidGame.GameActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
